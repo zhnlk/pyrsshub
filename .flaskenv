@@ -1,3 +1,3 @@
 FLASK_ENV=development
-FLASK_APP=rsshub
+FLASK_APP=pyrsshub
 FLASK_DEBUG=1

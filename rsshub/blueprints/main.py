@@ -2,14 +2,17 @@ from flask import Blueprint, render_template, request
 
 bp = Blueprint('main', __name__)
 
+
 @bp.route('/')
 def word():
     from rsshub.spiders.word.word import ctx
     return render_template('main/word.html', **ctx())
 
+
 @bp.route('/index')
 def index():
     return render_template('main/index.html')
+
 
 @bp.route('/feeds')
 def feeds():
@@ -34,13 +37,12 @@ def filter_content(ctx):
     return ctx
 
 
-
-#---------- feed路由从这里开始 -----------#
+# ---------- feed路由从这里开始 -----------#
 @bp.route('/cninfo/announcement/<string:stock_id>/<string:category>')
 @bp.route('/cninfo/announcement')
 def cninfo_announcement(stock_id='', category=''):
     from rsshub.spiders.cninfo.announcement import ctx
-    return render_template('main/atom.xml', **filter_content(ctx(stock_id,category)))
+    return render_template('main/atom.xml', **filter_content(ctx(stock_id, category)))
 
 
 @bp.route('/chuansongme/articles/<string:category>')
@@ -80,122 +82,146 @@ def earningsdate_prnewswire():
     from rsshub.spiders.earningsdate.prnewswire import ctx
     return render_template('main/atom.xml', **filter_content(ctx()))
 
+
 @bp.route('/earningsdate/globenewswire')
 def earningsdate_globenewswire():
     from rsshub.spiders.earningsdate.globenewswire import ctx
     return render_template('main/atom.xml', **filter_content(ctx()))
+
 
 @bp.route('/earningsdate/businesswire')
 def earningsdate_businesswire():
     from rsshub.spiders.earningsdate.businesswire import ctx
     return render_template('main/atom.xml', **filter_content(ctx()))
 
+
 @bp.route('/jiemian/newsflash/<string:category>')
 def jiemian_newsflash(category=''):
     from rsshub.spiders.jiemian.newsflash import ctx
     return render_template('main/atom.xml', **filter_content(ctx(category)))
+
 
 @bp.route('/csrc/audit/<string:category>')
 def csrc_audit(category=''):
     from rsshub.spiders.csrc.audit import ctx
     return render_template('main/atom.xml', **filter_content(ctx(category)))
 
+
 @bp.route('/caixin/scroll/<string:category>')
 def caixin_scroll(category=''):
     from rsshub.spiders.caixin.scroll import ctx
-    return render_template('main/atom.xml', **filter_content(ctx(category)))    
+    return render_template('main/atom.xml', **filter_content(ctx(category)))
+
 
 @bp.route('/eastmoney/report/<string:type>/<string:category>')
 def eastmoney_report(category='', type=''):
     from rsshub.spiders.eastmoney.report import ctx
-    return render_template('main/atom.xml', **filter_content(ctx(type,category)))      
+    return render_template('main/atom.xml', **filter_content(ctx(type, category)))
+
 
 @bp.route('/xuangubao/<string:type>/<string:category>')
 def xuangubao_xuangubao(type='', category=''):
     from rsshub.spiders.xuangubao.xuangubao import ctx
-    return render_template('main/atom.xml', **filter_content(ctx(type, category)))        
+    return render_template('main/atom.xml', **filter_content(ctx(type, category)))
+
 
 @bp.route('/cls/subject/<string:category>')
 def cls_subject(category=''):
     from rsshub.spiders.cls.subject import ctx
-    return render_template('main/atom.xml', **filter_content(ctx(category))) 
+    return render_template('main/atom.xml', **filter_content(ctx(category)))
+
 
 @bp.route('/cls/telegraph/')
 def cls_telegraph():
     from rsshub.spiders.cls.telegraph import ctx
-    return render_template('main/atom.xml', **filter_content(ctx()))          
+    return render_template('main/atom.xml', **filter_content(ctx()))
+
 
 @bp.route('/chaindd/column/<string:category>')
 def chaindd_column(category=''):
     from rsshub.spiders.chaindd.column import ctx
-    return render_template('main/atom.xml', **filter_content(ctx(category)))      
+    return render_template('main/atom.xml', **filter_content(ctx(category)))
+
 
 @bp.route('/techcrunch/tag/<string:category>')
 def techcrunch_tag(category=''):
     from rsshub.spiders.techcrunch.tag import ctx
     return render_template('main/atom.xml', **filter_content(ctx(category)))
 
+
 @bp.route('/weiyangx/home')
 def weiyangx_home():
     from rsshub.spiders.weiyangx.home import ctx
     return render_template('main/atom.xml', **filter_content(ctx()))
+
 
 @bp.route('/weiyangx/express/')
 def weiyangx_express():
     from rsshub.spiders.weiyangx.express import ctx
     return render_template('main/atom.xml', **filter_content(ctx()))
 
+
 @bp.route('/weiyangx/tag/<string:category>')
 def weiyangx_tag(category=''):
     from rsshub.spiders.weiyangx.tag import ctx
     return render_template('main/atom.xml', **filter_content(ctx(category)))
 
+
 @bp.route('/jintiankansha/column/<string:category>')
 def jintiankansha_column(category=''):
     from rsshub.spiders.jintiankansha.column import ctx
-    return render_template('main/atom.xml', **filter_content(ctx(category)))    
+    return render_template('main/atom.xml', **filter_content(ctx(category)))
+
 
 @bp.route('/interotc/cpgg/<string:category>')
 def interotc_cpgg(category=''):
     from rsshub.spiders.interotc.cpgg import ctx
-    return render_template('main/atom.xml', **filter_content(ctx(category)))    
+    return render_template('main/atom.xml', **filter_content(ctx(category)))
+
 
 @bp.route('/benzinga/ratings/<string:category>')
 def benzinga_ratings(category=''):
     from rsshub.spiders.benzinga.ratings import ctx
-    return render_template('main/atom.xml', **filter_content(ctx(category)))     
+    return render_template('main/atom.xml', **filter_content(ctx(category)))
 
-@bp.route('/chouti/section/<string:category>')       
+
+@bp.route('/chouti/section/<string:category>')
 def chouti_section(category=''):
     from rsshub.spiders.chouti.section import ctx
     return render_template('main/atom.xml', **filter_content(ctx(category)))
 
-@bp.route('/chouti/search/<string:category>')       
+
+@bp.route('/chouti/search/<string:category>')
 def chouti_search(category=''):
     from rsshub.spiders.chouti.search import ctx
     return render_template('main/atom.xml', **filter_content(ctx(category)))
 
-@bp.route('/chouti/user/<string:category>')       
+
+@bp.route('/chouti/user/<string:category>')
 def chouti_user(category=''):
     from rsshub.spiders.chouti.user import ctx
     return render_template('main/atom.xml', **filter_content(ctx(category)))
 
+
 @bp.route('/mp/tag/<string:mp>/<string:tag>')
 def mp_tag(mp='', tag=''):
     from rsshub.spiders.mp.tag import ctx
-    return render_template('main/atom.xml', **filter_content(ctx(mp,tag)))
+    return render_template('main/atom.xml', **filter_content(ctx(mp, tag)))
+
 
 @bp.route('/mp/gh/<string:gh>')
 def mp_gh(gh=''):
     from rsshub.spiders.mp.gh import ctx
-    return render_template('main/atom.xml', **filter_content(ctx(gh)))    
+    return render_template('main/atom.xml', **filter_content(ctx(gh)))
+
 
 @bp.route('/mp/youwuqiong/<string:author>')
 def mp_youwuqiong(author=''):
     from rsshub.spiders.mp.youwuqiong import ctx
-    return render_template('main/atom.xml', **filter_content(ctx(author)))        
+    return render_template('main/atom.xml', **filter_content(ctx(author)))
+
 
 @bp.route('/yfchuhai/express/')
 def yfchuhai_express():
     from rsshub.spiders.yfchuhai.express import ctx
-    return render_template('main/atom.xml', **filter_content(ctx()))    
+    return render_template('main/atom.xml', **filter_content(ctx()))
