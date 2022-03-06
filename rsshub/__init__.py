@@ -11,20 +11,20 @@ from rsshub.utils import XMLResponse
 
 def create_app(config_name=None):
     if config_name is None:
-        # config_name = os.getenv('FLASK_CONFIG', 'development')
-        config_name = os.getenv('FLASK_CONFIG', 'production')
+        config_name = os.getenv('FLASK_CONFIG', 'development')
+        # config_name = os.getenv('FLASK_CONFIG', 'production')
 
     app = Flask(__name__)
     app.config.from_object(config[config_name])
     app.response_class = XMLResponse
 
     # Add analytics 
-    from flask_analytics import Analytics
-    from rsshub.google_analytics import ga_account
+    # from flask_analytics import Analytics
+    # from rsshub.google_analytics import ga_account
 
-    Analytics(app)
-    app.config['ANALYTICS']['GOOGLE_UNIVERSAL_ANALYTICS']['ACCOUNT'] = ga_account
-    app.config['ANALYTICS']['ENABLED'] = True
+    # Analytics(app)
+    # app.config['ANALYTICS']['GOOGLE_UNIVERSAL_ANALYTICS']['ACCOUNT'] = ga_account
+    # app.config['ANALYTICS']['ENABLED'] = True
 
     register_blueprints(app)
     register_extensions(app)
