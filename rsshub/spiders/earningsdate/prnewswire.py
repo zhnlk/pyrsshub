@@ -1,4 +1,4 @@
-from rsshub.utils import fetch, filter_content, DEFAULT_HEADERS
+from rsshub.utils import fetch, filter_content, default_headers
 
 domain = 'https://www.prnewswire.com'
 
@@ -11,9 +11,9 @@ def parse(post):
     return item
 
 def ctx(category=''):
-    # DEFAULT_HEADERS.update({'upgrade-insecure-requests': 1})
+    # default_headers.update({'upgrade-insecure-requests': 1})
     url = f"{domain}/news-releases/financial-services-latest-news/earnings-list/?page=1&pagesize=100"
-    tree = fetch(url, headers=DEFAULT_HEADERS)
+    tree = fetch(url, headers=default_headers)
     posts = tree.css('.card-list-hr .row')
     items = list(map(parse, posts)) 
     items = filter_content(items)

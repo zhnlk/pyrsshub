@@ -1,5 +1,5 @@
 from rsshub.utils import fetch
-from rsshub.utils import DEFAULT_HEADERS
+from rsshub.utils import default_headers
 
 domain = 'https://www.chaindd.com'
 
@@ -14,7 +14,7 @@ def parse(post):
 
 
 def ctx(category=''):
-    DEFAULT_HEADERS.update({'Referer': f'https://www.chaindd.com/column/{category}'}) 
+    default_headers.update({'Referer': f'https://www.chaindd.com/column/{category}'})
     tree = fetch(f"{domain}/column/{category}")
     posts = tree.css('li .cont')
     return {

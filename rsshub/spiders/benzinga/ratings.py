@@ -1,4 +1,4 @@
-from rsshub.utils import DEFAULT_HEADERS
+from rsshub.utils import default_headers
 from rsshub.utils import fetch
 
 domain = 'https://www.benzinga.com'
@@ -15,7 +15,7 @@ def ctx(category=''):
 
     
     url = f'{domain}/stock/{category}/ratings'
-    tree = fetch(url, headers=DEFAULT_HEADERS)
+    tree = fetch(url, headers=default_headers)
     posts = tree.css('tbody tr')
     items = list(map(parse, posts))
 

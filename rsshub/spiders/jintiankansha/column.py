@@ -1,4 +1,4 @@
-from rsshub.utils import DEFAULT_HEADERS
+from rsshub.utils import default_headers
 from rsshub.utils import fetch
 
 domain = 'http://www.jintiankansha.me'
@@ -13,8 +13,8 @@ def parse(post):
 
 def ctx(category=''):
     url = f'{domain}/column/{category}'
-    DEFAULT_HEADERS.update({'Host': 'www.jintiankansha.me'})
-    tree = fetch(url, headers=DEFAULT_HEADERS)
+    default_headers.update({'Host': 'www.jintiankansha.me'})
+    tree = fetch(url, headers=default_headers)
     posts = tree.css('.cell.item')
     items = list(map(parse, posts))
 

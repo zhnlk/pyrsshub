@@ -1,4 +1,4 @@
-from rsshub.utils import DEFAULT_HEADERS
+from rsshub.utils import default_headers
 import requests
 import json
 from parsel import Selector
@@ -17,7 +17,7 @@ def parse(post):
 
 def ctx(category=''):
     url = f'https://www.weiyangx.com/tag/{category}'
-    res = requests.get(url, headers=DEFAULT_HEADERS)
+    res = requests.get(url, headers=default_headers)
     res = Selector(res.text)    
     posts = res.css('script::text')[-4].extract().split('=')[-1] 
     posts = json.loads(posts)   

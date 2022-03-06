@@ -1,5 +1,5 @@
 import requests
-from rsshub.utils import DEFAULT_HEADERS
+from rsshub.utils import default_headers
 
 domain = 'http://www.cninfo.com.cn'
 
@@ -16,7 +16,7 @@ def parse(post):
 def ctx(stock_id='', category=''):
     stock_id = '' if stock_id == 'all' else stock_id
     stock_name = ''
-    stock_list = requests.get('http://www.cninfo.com.cn/new/data/szse_stock.json', headers=DEFAULT_HEADERS).json()['stockList']
+    stock_list = requests.get('http://www.cninfo.com.cn/new/data/szse_stock.json', headers=default_headers).json()['stockList']
     for stock in stock_list:
         if stock['code'] == stock_id :
             stock_id = stock['orgId']
@@ -39,12 +39,12 @@ def ctx(stock_id='', category=''):
         # column = 'szse'
 
         
-    DEFAULT_HEADERS.update({'Referer': domain}) 
+    default_headers.update({'Referer': domain})
     post_data = {'pageNum':'1', 'pageSize': '30','column': column, 'tabName':'fulltext', 'plate': '', \
                 'category': category, 'secid': stock_id, 'seDate': seDate, 'searchkey': searchkey }
     print(post_data)
     posts = requests.post(f'{domain}/new/hisAnnouncement/query', \
-            data=post_data, headers=DEFAULT_HEADERS).json()['announcements']
+            data=post_data, headers=default_headers).json()['announcements']
     return {
         'title': f'{stock_name}-{category}-公告-巨潮资讯',
         'link': f'{domain}/new/commonUrl/pageOfSearch?url=disclosure/list/search&checkedCategory=category_{category}_szsh&searchkey={searchkey}',

@@ -1,6 +1,6 @@
 import requests
 import json
-from rsshub.utils import DEFAULT_HEADERS
+from rsshub.utils import default_headers
 
 domain = 'https://techcrunch.com'
 
@@ -14,7 +14,7 @@ def parse(post):
 
 def ctx(category=''):
     url = f'{domain}/wp-json/tc/v1/magazine?tags={category}'
-    res = requests.get(url, headers=DEFAULT_HEADERS)
+    res = requests.get(url, headers=default_headers)
     res = json.loads(res.text)
     posts = res 
     items = list(map(parse, posts))

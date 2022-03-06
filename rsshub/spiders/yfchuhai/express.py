@@ -1,5 +1,5 @@
 import requests
-from rsshub.utils import DEFAULT_HEADERS
+from rsshub.utils import default_headers
 
 domain = 'https://www.yfchuhai.com'
 
@@ -15,10 +15,10 @@ def parse(post):
 
 
 def ctx(category=''):
-    DEFAULT_HEADERS.update({'Referer': 'https://www.yfchuhai.com/news/'}) 
+    default_headers.update({'Referer': 'https://www.yfchuhai.com/news/'})
     r_url = f'{domain}/api/News/getList'
     print(r_url)
-    posts = requests.get(r_url, headers=DEFAULT_HEADERS).json()['data']['list']
+    posts = requests.get(r_url, headers=default_headers).json()['data']['list']
     user_name = posts[0]
     return {
         'title': '快讯 - 扬帆出海',

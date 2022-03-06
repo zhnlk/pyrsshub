@@ -1,5 +1,5 @@
 import requests
-from rsshub.utils import DEFAULT_HEADERS
+from rsshub.utils import default_headers
 
 domain = 'https://www.interotc.com.cn'
 
@@ -17,11 +17,11 @@ def parse(post):
 
 
 def ctx(category=''):
-    DEFAULT_HEADERS.update({'Host': 'www.interotc.com.cn'}) 
+    default_headers.update({'Host': 'www.interotc.com.cn'})
     url = f'{domain}/zzjsInterface/interface/fixedIncome/lettersListNew.json'
     # req_params = {'pageSize': '10','startDate':'-1', 'keyword': category, 'pageIndex': '1'}
     # posts = requests.post(url, \
-    #         data=req_params, headers=DEFAULT_HEADERS)
+    #         data=req_params, headers=default_headers)
     req_params = f'?keyword={category}&pageSize=150'
     posts = requests.get(url+req_params)
     import json

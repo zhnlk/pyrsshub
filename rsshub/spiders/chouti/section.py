@@ -1,5 +1,5 @@
 import requests
-from rsshub.utils import DEFAULT_HEADERS
+from rsshub.utils import default_headers
 
 domain = 'https://dig.chouti.com'
 
@@ -15,10 +15,10 @@ def parse(post):
 
 
 def ctx(category=''):
-    DEFAULT_HEADERS.update({'Referer': domain}) 
+    default_headers.update({'Referer': domain})
     post_data = {'sectionId':category}
     r_url = f'{domain}/section/links'
-    posts = requests.post(r_url, data=post_data, headers=DEFAULT_HEADERS).json()['data']
+    posts = requests.post(r_url, data=post_data, headers=default_headers).json()['data']
     return {
         'title': f'{category} - 抽屉热榜',
         'link': r_url,

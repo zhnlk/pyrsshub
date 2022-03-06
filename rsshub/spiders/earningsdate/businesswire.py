@@ -1,5 +1,5 @@
 from rsshub.utils import fetch, filter_content
-from rsshub.utils import DEFAULT_HEADERS
+from rsshub.utils import default_headers
 
 domain = 'businesswire.com'
 
@@ -15,7 +15,7 @@ def parse(post):
 
 def ctx(category=''):
     tree = fetch(f"https://feed.{domain}/rss/home/?rss=G1QFDERJXkJeGVtYWA==", 
-                headers=DEFAULT_HEADERS)
+                headers=default_headers)
     posts = tree.css('item')
     items = list(map(parse, posts))
     items = filter_content(items)

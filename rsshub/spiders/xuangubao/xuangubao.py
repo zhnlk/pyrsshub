@@ -1,6 +1,6 @@
 import requests
 import json
-from rsshub.utils import DEFAULT_HEADERS
+from rsshub.utils import default_headers
 
 
 def parse(post):
@@ -19,7 +19,7 @@ def ctx(type='', category=''):
     api_subpath = 'bkjMsgs' if type == 'theme' else 'subj'
     url = f'https://api.xuangubao.cn/api/pc/{api_subpath}/{category}?limit=20'
     print(url)
-    res = requests.get(url, headers=DEFAULT_HEADERS)
+    res = requests.get(url, headers=default_headers)
     res = json.loads(res.text)
     posts = res['Messages']
     theme_name = res['BkjName'] if type == 'theme' else res['Subject']['Title']

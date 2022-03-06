@@ -1,5 +1,5 @@
 import requests
-from rsshub.utils import DEFAULT_HEADERS
+from rsshub.utils import default_headers
 
 
 def parse(post):
@@ -13,7 +13,7 @@ def parse(post):
 
 def ctx():
     url = f'https://www.cls.cn/nodeapi/telegraphList'
-    res = requests.get(url, headers=DEFAULT_HEADERS)
+    res = requests.get(url, headers=default_headers)
     posts = res.json()['data']['roll_data']
     items = list(map(parse, posts))
     return {

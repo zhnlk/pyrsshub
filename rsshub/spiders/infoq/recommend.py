@@ -1,5 +1,5 @@
 import requests
-from rsshub.utils import DEFAULT_HEADERS
+from rsshub.utils import default_headers
 
 domain = 'https://www.infoq.cn'
 
@@ -13,9 +13,9 @@ def parse(post):
 
 
 def ctx():
-    DEFAULT_HEADERS.update({'Referer': 'https://www.infoq.cn'}) # 必须设置Referer，不然会451错误
+    default_headers.update({'Referer': 'https://www.infoq.cn'}) # 必须设置Referer，不然会451错误
     import json
-    posts = requests.post(f'{domain}/public/v1/my/recommond', json={'size': 20}, headers=DEFAULT_HEADERS)
+    posts = requests.post(f'{domain}/public/v1/my/recommond', json={'size': 20}, headers=default_headers)
     posts = json.loads(posts.text)['data']
     return {
         'title': 'infoq',

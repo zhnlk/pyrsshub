@@ -3,7 +3,7 @@ from flask import Response
 import requests
 from parsel import Selector
 
-DEFAULT_HEADERS = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36'}
+default_headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36'}
 
 
 class XMLResponse(Response):
@@ -14,7 +14,7 @@ class XMLResponse(Response):
         return super().__init__(response, **kwargs)
 
 
-def fetch(url: str, headers: dict=DEFAULT_HEADERS, proxies: dict=None):
+def fetch(url: str, headers: dict = default_headers, proxies: dict = None):
     try:
         res = requests.get(url, headers=headers, proxies=proxies)
         res.raise_for_status()
@@ -25,8 +25,9 @@ def fetch(url: str, headers: dict=DEFAULT_HEADERS, proxies: dict=None):
         tree = Selector(text=html)
         return tree
 
+
 def filter_content(items):
-    content = []    
+    content = []
     p1 = re.compile(r'(.*)(to|will|date|schedule) (.*)results', re.IGNORECASE)
     p2 = re.compile(r'(.*)(schedule|schedules|announce|to) (.*)call', re.IGNORECASE)
     p3 = re.compile(r'(.*)release (.*)date', re.IGNORECASE)
@@ -35,4 +36,4 @@ def filter_content(items):
         title = item['title']
         if p1.match(title) or p2.match(title) or p3.match(title):
             content.append(item)
-    return content  
+    return content

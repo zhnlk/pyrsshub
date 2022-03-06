@@ -1,7 +1,7 @@
 import requests
 import json
 from parsel import Selector
-from rsshub.utils import DEFAULT_HEADERS
+from rsshub.utils import default_headers
 
 domain = 'https://www.weiyangx.com'
 
@@ -20,7 +20,7 @@ def parse(post):
 
 def ctx():
     url = f'https://www.weiyangx.com/category/express'
-    res = requests.get(url, headers=DEFAULT_HEADERS)
+    res = requests.get(url, headers=default_headers)
     res = Selector(res.text)
     posts = res.css('script::text')[-4].extract().split('=')[-1]
     posts = json.loads(posts)

@@ -1,6 +1,6 @@
 import requests
 import json
-from rsshub.utils import DEFAULT_HEADERS
+from rsshub.utils import default_headers
 
 
 def parse(post):
@@ -16,7 +16,7 @@ def parse(post):
 
 def ctx(category=''):
     url = f'https://i.cls.cn/articles/subject/v1/{category}?sign=ab07b305da92f72ea5e509ba6d1216ff&app=cailianpress&LastTime=&PageNum=20&os=android&sv=734'
-    res = requests.get(url, headers=DEFAULT_HEADERS)
+    res = requests.get(url, headers=default_headers)
     res = json.loads(res.text)
     posts = res
     items = list(map(parse, posts))
