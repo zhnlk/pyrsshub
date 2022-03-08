@@ -1,6 +1,6 @@
 import unittest
 from flask import url_for
-from rsshub import create_app
+from pyrsshub import create_app
 
 
 class BaseTestCase(unittest.TestCase):
